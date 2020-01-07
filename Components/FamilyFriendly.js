@@ -8,30 +8,26 @@ import {
   Alert
 } from "react-native";
 
-const Card = props => {
+const FamilyFriendly = props => {
   return (
-    <View style={{ ...styles.card, ...props.style }}>
-      <Text style={styles.title}>Confirm these interests?</Text>
-      <TouchableOpacity>
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button
-              title="Choose Again"
-              color="hotpink"
-              onPress={props.resetInterests}
-            />
-          </View>
-          <View style={styles.button}>
-            <Button title="Confirm" color="grey" onPress={props.confirm} />
-          </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>
+        Would you like to attend family friendly events?
+      </Text>
+      <View style={styles.buttonContainer}>
+        <View style={styles.button}>
+          <Button title="Yes" color="hotpink" onPress={props.resetInterests} />
         </View>
-      </TouchableOpacity>
+        <View style={styles.button}>
+          <Button title="No" color="grey" onPress={props.confirm} />
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
+  container: {
     position: "absolute",
     margin: 20,
     top: 70,
@@ -65,4 +61,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Card;
+export default FamilyFriendly;

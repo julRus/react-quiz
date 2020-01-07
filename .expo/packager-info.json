@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 21875,
+  "expoServerNgrokUrl": "https://2b-kv6.anonymous.react-quiz.exp.direct",
+  "packagerNgrokUrl": "https://packager.2b-kv6.anonymous.react-quiz.exp.direct",
+  "ngrokPid": 21904,
   "webpackServerPort": null
 }

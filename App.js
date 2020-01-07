@@ -9,9 +9,10 @@ import {
   Alert
 } from "react-native";
 import Card from "./Components/Card";
+import FamilyFriendly from "./Components/FamilyFriendly";
 
 let card;
-let count = 1;
+let nextQuestion;
 
 export default class HomeActivity extends Component {
   state = {
@@ -110,7 +111,12 @@ export default class HomeActivity extends Component {
           interest.clicked = true;
           interest.opacity = 0.2;
           if (this.state.interests.length === 4) {
-            card = <Card resetInterests={this.clearInterests} />;
+            card = (
+              <Card
+                resetInterests={this.clearInterests}
+                confirm={this.changeScreen}
+              />
+            );
             this.state.display = "none";
           }
         } else if (interest.key === item && interest.clicked === true) {
@@ -136,10 +142,17 @@ export default class HomeActivity extends Component {
     card = null;
   };
 
+  changeScreen = () => {
+    this.setState({ display: "none" });
+    nextQuestion = <FamilyFriendly />;
+    card = null;
+  };
+
   render() {
     return (
       <View style={styles.container}>
         {card}
+        {nextQuestion}
         <View style={{ display: this.state.display }}>
           <Text style={styles.title}>
             What are your interests?{" "}
