@@ -16,15 +16,19 @@ const Card = props => {
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
             <Button
+              title="Choose Again"
+              color="hotpink"
+              onPress={props.resetInterests}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button
               title="Confirm"
               color="white"
               onPress={() => {
                 Alert.alert("WOW");
               }}
             />
-          </View>
-          <View style={styles.button}>
-            <Button title="Choose Again" color="hotpink" />
           </View>
         </View>
       </TouchableOpacity>

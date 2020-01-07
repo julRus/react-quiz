@@ -108,16 +108,14 @@ export default class HomeActivity extends Component {
         ) {
           this.state.interests.push(item);
           interest.clicked = true;
-          count += 1;
           interest.opacity = 0.2;
           if (this.state.interests.length === 4) {
-            card = <Card></Card>;
+            card = <Card resetInterests={this.clearInterests} />;
             this.state.display = "none";
           }
         } else if (interest.key === item && interest.clicked === true) {
           this.state.interests.splice(this.state.interests.indexOf(item), 1);
           interest.clicked = false;
-          count -= 1;
           return (interest.opacity = 1);
         }
       });
@@ -125,9 +123,18 @@ export default class HomeActivity extends Component {
     });
   };
 
-  trigger() {
-    this.setState({ display: "none" });
-  }
+  clearInterests = () => {
+    this.state.interests.splice(0, this.state.interests.length);
+    this.setState(currentState => {
+      const newState = currentState.GridListItems.map(interest => {
+        interest.opacity = 1;
+        interest.clicked = false;
+      });
+      this.state.display = "flex";
+      return newState;
+    });
+    card = null;
+  };
 
   render() {
     return (
@@ -188,7 +195,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "black"
+    backgroundColor: "black",
+    paddingBottom: 60
   },
   title: {
     marginTop: 100,

@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 17647,
-  "expoServerNgrokUrl": "https://5d-vtg.anonymous.react-quiz.exp.direct",
-  "packagerNgrokUrl": "https://packager.5d-vtg.anonymous.react-quiz.exp.direct",
-  "ngrokPid": 17680,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }
