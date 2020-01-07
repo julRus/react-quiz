@@ -11,6 +11,7 @@ import {
 import Card from "./Components/Card";
 
 let card;
+let count = 1;
 
 export default class HomeActivity extends Component {
   state = {
@@ -88,7 +89,7 @@ export default class HomeActivity extends Component {
         clicked: false
       }
     ],
-    count: 1,
+    interests: [],
     opacity: 0,
     display: "flex"
   };
@@ -100,30 +101,43 @@ export default class HomeActivity extends Component {
   GetGridViewItem = item => {
     this.setState(currentState => {
       const newState = currentState.GridListItems.map(interest => {
-        if (interest.key === item && interest.clicked === false) {
-          this.state.count++;
+        if (
+          interest.key === item &&
+          interest.clicked === false &&
+          this.state.interests.length < 4
+        ) {
+          this.state.interests.push(item);
           interest.clicked = true;
-          return (interest.opacity = 0.2);
+          count += 1;
+          interest.opacity = 0.2;
+          if (this.state.interests.length === 4) {
+            card = <Card></Card>;
+            this.state.display = "none";
+          }
         } else if (interest.key === item && interest.clicked === true) {
-          this.state.count--;
+          this.state.interests.splice(this.state.interests.indexOf(item), 1);
           interest.clicked = false;
+          count -= 1;
           return (interest.opacity = 1);
         }
       });
       return newState;
     });
-    if (this.state.count === 4) {
-      card = <Card></Card>;
-      this.setState({ display: "none" });
-    }
   };
+
+  trigger() {
+    this.setState({ display: "none" });
+  }
 
   render() {
     return (
       <View style={styles.container}>
         {card}
         <View style={{ display: this.state.display }}>
-          <Text style={styles.title}>What are your interests? (choose 4)</Text>
+          <Text style={styles.title}>
+            What are your interests?{" "}
+            {`Choose ${4 - this.state.interests.length}`}
+          </Text>
           <FlatList
             data={this.state.GridListItems}
             renderItem={({ item }) => (
