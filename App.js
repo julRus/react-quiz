@@ -10,33 +10,76 @@ import {
 } from "react-native";
 
 export default class HomeActivity extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    GridListItems: [
+      {
+        key: "Music/Gigs",
+        img: require("./sourceImgs/live-music-gigs.jpg"),
+        opacity: 1
+      },
+      {
+        key: "Art",
+        img: require("./sourceImgs/art.jpg"),
+        opacity: 1
+      },
+      {
+        key: "Theatre",
+        img: require("./sourceImgs/theatre.jpg"),
+        opacity: 1
+      },
+      {
+        key: "Sport",
+        img: require("./sourceImgs/sport.jpg"),
+        opacity: 1
+      },
+      {
+        key: "Alcohol",
+        img: require("./sourceImgs/alcohol.jpg"),
+        opacity: 1
+      },
+      {
+        key: "Food",
+        img: require("./sourceImgs/food.jpg"),
+        opacity: 1
+      },
+      { key: "Tech", img: require("./sourceImgs/Tech.jpg"), opacity: 1 },
+      {
+        key: "Harry Potter",
+        img: require("./sourceImgs/hp.jpg"),
+        opacity: 1
+      },
+      { key: "Quizes", img: require("./sourceImgs/quiz.jpg"), opacity: 1 },
+      {
+        key: "Outdoor",
+        img: require("./sourceImgs/outdoor.jpg"),
+        opacity: 1
+      },
+      {
+        key: "Comedy",
+        img: require("./sourceImgs/comedy.jpg"),
+        opacity: 1
+      },
+      { key: "Games", img: require("./sourceImgs/games.jpg"), opacity: 1 }
+    ],
+    count: 0
+  };
 
-    this.state = {
-      GridListItems: [
-        {
-          key: "Music/Gigs",
-          img: require("./sourceImgs/live-music-gigs.jpg")
-        },
-        { key: "Art", img: require("./sourceImgs/art.jpg") },
-        { key: "Theatre", img: require("./sourceImgs/theatre.jpg") },
-        { key: "Sport", img: require("./sourceImgs/sport.jpg") },
-        { key: "Alcohol", img: require("./sourceImgs/alcohol.jpg") },
-        { key: "Food", img: require("./sourceImgs/food.jpg") },
-        { key: "Tech", img: require("./sourceImgs/Tech.jpg") },
-        { key: "Harry Potter", img: require("./sourceImgs/hp.jpg") },
-        { key: "Quizes", img: require("./sourceImgs/quiz.jpg") },
-        { key: "Outdoor", img: require("./sourceImgs/outdoor.jpg") },
-        { key: "Comedy", img: require("./sourceImgs/comedy.jpg") },
-        { key: "Games", img: require("./sourceImgs/games.jpg") }
-      ]
-    };
-  }
+  overlay = {
+    disable: null
+  };
 
-  GetGridViewItem(item) {
-    Alert.alert("HI");
-  }
+  GetGridViewItem = item => {
+    this.setState({ count: count + 1 });
+    this.setState(currentState => {
+      const newState = currentState.GridListItems.map(interest => {
+        if (interest.key === item) {
+          return (interest.opacity = 0.2);
+        }
+      });
+      return newState;
+    });
+    Alert.alert(this.state.count);
+  };
 
   render() {
     return (
@@ -45,7 +88,16 @@ export default class HomeActivity extends Component {
         <FlatList
           data={this.state.GridListItems}
           renderItem={({ item }) => (
-            <View style={styles.GridViewContainer}>
+            <View
+              style={{
+                opacity: item.opacity,
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                height: 210,
+                margin: 5
+              }}
+            >
               <ImageBackground
                 style={{
                   width: "100%",
@@ -54,13 +106,19 @@ export default class HomeActivity extends Component {
                 }}
                 source={item.img}
               >
-                <TouchableOpacity underlayColor="#fff">
-                  <Text
-                    style={styles.GridViewTextLayout}
-                    onPress={this.GetGridViewItem}
-                  >
-                    {item.key}
-                  </Text>
+                <TouchableOpacity
+                  style={{
+                    height: 230,
+                    width: 200,
+                    alignItems: "center",
+                    marginTop: 10,
+                    backgroundColor: "black",
+                    opacity: 0.5,
+                    top: -10
+                  }}
+                  onPress={this.GetGridViewItem.bind(this, item.key)}
+                >
+                  <Text style={styles.GridViewTextLayout}>{item.key}</Text>
                 </TouchableOpacity>
               </ImageBackground>
             </View>
@@ -94,6 +152,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   GridViewContainer: {
+    display: "flex",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -108,9 +167,15 @@ const styles = StyleSheet.create({
   GridViewTextLayout: {
     fontSize: 20,
     margin: 20,
+    paddingRight: 30,
     fontWeight: "bold",
     justifyContent: "center",
     textAlign: "center",
     color: "#fff"
+  },
+  button: {
+    opacity: 0.6,
+    width: "100%",
+    maxWidth: "100%"
   }
 });
